@@ -35,7 +35,8 @@
     <inherits name="org.semanticweb.owlapi.gwt.owlapi"/>
 
 	<inherits name='com.gwtext.GwtExt' />
-	
+
+    <inherits name="org.ontologyengineering.protege.web.ConceptDiagram"/>
     <!--<generate-with class="edu.stanford.bmir.protege.web.server.generated.UIFactoryGenerator">-->
         <!--<when-type-assignable class="edu.stanford.bmir.protege.web.client.ui.generated.PluginFactory"/>-->
     <!--</generate-with>-->

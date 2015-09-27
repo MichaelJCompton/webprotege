@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+
+
+
+    <source path="client"/>
+    <!-- <source path="shared"/> -->
+
+
+    <!-- The graphics library -->
+    <inherits name="com.ait.lienzo.Lienzo"/>
+
+    <inherits name="edu.stanford.bmir.protege.web.WebProtege"/>
+
+    <inherits name="org.ontologyengineering.conceptdiagrams.web.ConceptDiagrams"/>
+
+
+    <entry-point class="org.ontologyengineering.protege.web.client.ConceptDiagram"/>
+
+</module>
+

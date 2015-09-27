@@ -30,6 +30,7 @@ import edu.stanford.bmir.protege.web.client.ui.tab.AbstractTab;
 import edu.stanford.bmir.protege.web.client.ui.tab.UserDefinedTab;
 import edu.stanford.bmir.protege.web.client.usage.UsagePortlet;
 import edu.stanford.bmir.protege.web.shared.selection.SelectionModel;
+import org.ontologyengineering.protege.web.client.DiagramsEntityPortlet;
 
 import java.util.*;
 
@@ -164,6 +165,9 @@ public class UIFactory {
             }
             else if (portletJavaClassName.endsWith(OWLEntityDescriptionEditorPortlet.class.getName())) {
                 return new OWLEntityDescriptionEditorPortlet(selectionModel, project);
+            }
+            else if (portletJavaClassName.equals(DiagramsEntityPortlet.class.getName())) {
+                return new DiagramsEntityPortlet(selectionModel, project);
             }
             else {
                 GWT.log("Portlet not found: " + portletJavaClassName);

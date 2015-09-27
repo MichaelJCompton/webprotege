@@ -1,6 +1,35 @@
 <project>
     <tabs>
 
+
+
+        <!-- ********************************** -->
+        <!--          ConceptDiagram Tab        -->
+        <!-- ********************************** -->
+
+        <tab>
+            <name>edu.stanford.bmir.protege.web.client.ui.tab.UserDefinedTab</name>
+            <label>ConceptDiagram</label>
+            <columns>
+
+                <!-- Column 1 -->
+                <column>
+                    <width>1</width>
+                    <portlets>
+                        <portlet>
+                            <name>org.ontologyengineering.protege.web.client.DiagramsEntityPortlet</name>
+                            <height>570</height>
+                            <width>600</width>
+                        </portlet>
+                    </portlets>
+                </column>
+            </columns>
+            <controllingPortlet reference="../columns/column/portlets/portlet"/>
+        </tab>
+
+
+
+
         <!-- ********************************** -->
         <!--          Classes Tab               -->
         <!-- ********************************** -->
