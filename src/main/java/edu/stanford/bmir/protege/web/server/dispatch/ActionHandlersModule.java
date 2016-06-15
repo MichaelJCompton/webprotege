@@ -51,6 +51,7 @@ import edu.stanford.bmir.protege.web.server.watches.RemoveWatchActionHandler;
 import edu.stanford.bmir.protege.web.server.project.SetUIConfigurationActionHandler;
 import edu.stanford.bmir.protege.web.server.revision.*;
 import edu.stanford.bmir.protege.web.shared.frame.GetOntologyFramesAction;
+import org.ontologyengineering.protege.web.server.dispatch.handlers.ConceptDiagramsConvertAllActionHandler;
 
 /**
  * Matthew Horridge
@@ -180,5 +181,7 @@ public class ActionHandlersModule extends AbstractModule {
         multibinder.addBinding().to(GetPersonIdCompletionsActionHandler.class);
         multibinder.addBinding().to(GetUserIdCompletionsActionHandler.class);
         multibinder.addBinding().to(GetPersonIdItemsActionHandler.class);
+
+        multibinder.addBinding().to(ConceptDiagramsConvertAllActionHandler.class);
     }
 }

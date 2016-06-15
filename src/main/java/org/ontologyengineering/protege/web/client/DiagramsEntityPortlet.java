@@ -1,16 +1,16 @@
 package org.ontologyengineering.protege.web.client;
 
-import com.ait.lienzo.client.core.event.NodeMouseDownEvent;
-import com.ait.lienzo.client.core.event.NodeMouseDownHandler;
-import com.ait.lienzo.client.core.shape.Layer;
-import com.ait.lienzo.client.core.shape.Rectangle;
-import com.ait.lienzo.client.core.types.Transform;
-import com.ait.lienzo.client.widget.LienzoPanel;
-import com.ait.lienzo.shared.core.types.Color;
-import com.ait.lienzo.shared.core.types.ColorName;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.i18n.client.DateTimeFormat;
+//import com.ait.lienzo.client.core.event.NodeMouseDownEvent;
+//import com.ait.lienzo.client.core.event.NodeMouseDownHandler;
+//import com.ait.lienzo.client.core.shape.Layer;
+//import com.ait.lienzo.client.core.shape.Rectangle;
+//import com.ait.lienzo.client.core.types.Transform;
+//import com.ait.lienzo.client.widget.LienzoPanel;
+//import com.ait.lienzo.shared.core.types.Color;
+//import com.ait.lienzo.shared.core.types.ColorName;
+//import com.google.gwt.event.dom.client.ClickEvent;
+//import com.google.gwt.event.dom.client.ClickHandler;
+//import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Panel;
@@ -18,7 +18,8 @@ import com.gwtext.client.widgets.*;
 import edu.stanford.bmir.protege.web.client.project.Project;
 import edu.stanford.bmir.protege.web.client.ui.portlet.AbstractOWLEntityPortlet;
 import edu.stanford.bmir.protege.web.shared.selection.SelectionModel;
-import org.ontologyengineering.conceptdiagrams.web.client.LienzoDiagramCanvas;
+import org.ontologyengineering.conceptdiagrams.web.client.ui.LienzoDiagramCanvas;
+import org.ontologyengineering.protege.web.client.handler.WebProtegeConvertToOWLServiceManager;
 
 
 import java.util.*;
@@ -28,6 +29,8 @@ import java.util.*;
  * Created by Michael on 24/08/2015.
  */
 public class DiagramsEntityPortlet extends AbstractOWLEntityPortlet {
+
+
 
     private LienzoDiagramCanvas diagramCanvas;
 
@@ -54,7 +57,7 @@ public class DiagramsEntityPortlet extends AbstractOWLEntityPortlet {
         int height = getInnerHeight();
         Panel test = new AbsolutePanel();
         add(test);
-        diagramCanvas = new LienzoDiagramCanvas(width, height, test);
+        diagramCanvas = new LienzoDiagramCanvas(width, height, test, new WebProtegeConvertToOWLServiceManager(getProjectId()));
 
 //        com.gwtext.client.widgets.Panel test = new com.gwtext.client.widgets.Panel();
 //        diagramCanvas = new LienzoDiagramCanvas(width, height, test);
