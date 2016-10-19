@@ -1,2 +1,0 @@
-serviceClass: org.ontologyengineering.conceptdiagrams.web.client.handler.ConvertAllToOWLService
-path: 45CA96ACDB1FC078BE5D428B6780B9AF.gwt.rpc
