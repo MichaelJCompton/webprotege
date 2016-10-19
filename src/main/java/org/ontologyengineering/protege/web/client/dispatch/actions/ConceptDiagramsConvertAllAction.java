@@ -1,13 +1,14 @@
 package org.ontologyengineering.protege.web.client.dispatch.actions;
 
 import edu.stanford.bmir.protege.web.client.dispatch.AbstractHasProjectAction;
-import edu.stanford.bmir.protege.web.client.dispatch.actions.CreateClassResult;
 import edu.stanford.bmir.protege.web.shared.project.ProjectId;
 import org.ontologyengineering.conceptdiagrams.web.shared.commands.Command;
-import org.ontologyengineering.conceptdiagrams.web.shared.diagrams.DiagramSet;
-import org.semanticweb.owlapi.model.OWLClass;
+import org.ontologyengineering.conceptdiagrams.web.shared.concretesyntax.DiagramSet;
+
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -15,12 +16,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 // Based on CreateClassAction
 
 /**
- * Created by Michael on 15/06/2016.
+ * Author: Michael Compton<br>
+ * Date: June 2016<br>
+ * See license information in base directory.
  */
+
 public class ConceptDiagramsConvertAllAction extends AbstractHasProjectAction<ConceptDiagramsConvertAllResult> {
 
-    private ArrayList<Command> history;
-    private DiagramSet diagrams;
+    private HashSet<ArrayList<Command>> histories;
+    private HashMap<String, DiagramSet> diagrams;
+
+
 
     /**
      * For serialization only
@@ -28,17 +34,17 @@ public class ConceptDiagramsConvertAllAction extends AbstractHasProjectAction<Co
     private ConceptDiagramsConvertAllAction() {
     }
 
-    public ConceptDiagramsConvertAllAction(ProjectId projectId, ArrayList<Command> history, DiagramSet diagrams) {
+    public ConceptDiagramsConvertAllAction(ProjectId projectId, HashSet<ArrayList<Command>> histories, HashMap<String, DiagramSet> diagrams) {
         super(checkNotNull(projectId));
-        this.history = history;
+        this.histories = histories;
         this.diagrams = diagrams;
     }
 
-    public ArrayList<Command> getHistory() {
-        return history;
+    public HashSet<ArrayList<Command>> getHistories() {
+        return histories;
     }
 
-    public DiagramSet getDiagrams() {
+    public HashMap<String, DiagramSet> getDiagrams() {
         return diagrams;
     }
 }

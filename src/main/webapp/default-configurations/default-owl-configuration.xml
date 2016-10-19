@@ -7,7 +7,7 @@
 
         <tab>
             <name>edu.stanford.bmir.protege.web.client.ui.tab.UserDefinedTab</name>
-            <label>ConceptDiagram</label>
+            <label>Property Diagrams</label>
             <columns>
 
                 <!-- Column 1 -->

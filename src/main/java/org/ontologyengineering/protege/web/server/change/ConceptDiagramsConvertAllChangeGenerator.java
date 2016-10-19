@@ -10,22 +10,27 @@ import org.ontologyengineering.conceptdiagrams.web.server.owlOutput.ConvertDiagr
 import org.ontologyengineering.conceptdiagrams.web.server.owlOutput.OWLAPIOutputBuilder;
 import org.ontologyengineering.conceptdiagrams.web.server.transformations.TransformationManager;
 import org.ontologyengineering.conceptdiagrams.web.shared.commands.Command;
-import org.ontologyengineering.conceptdiagrams.web.shared.diagrams.DiagramSet;
+import org.ontologyengineering.conceptdiagrams.web.shared.concretesyntax.DiagramSet;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 /**
- * Created by Michael on 15/06/2016.
+ * Author: Michael Compton<br>
+ * Date: June 2016<br>
+ * See license information in base directory.
  */
 public class ConceptDiagramsConvertAllChangeGenerator implements ChangeListGenerator<OWLClass> {
 
-    private ArrayList<Command> history;
-    private DiagramSet diagrams;
+    private HashSet<ArrayList<Command>> histories;
+    private HashMap<String, DiagramSet> diagrams;
 
-    public ConceptDiagramsConvertAllChangeGenerator(ArrayList<Command> history, DiagramSet diagrams) {
-        this.history = history;
+
+    public ConceptDiagramsConvertAllChangeGenerator(HashSet<ArrayList<Command>> histories, HashMap<String, DiagramSet> diagrams) {
+        this.histories = histories;
         this.diagrams = diagrams;
     }
 
@@ -33,22 +38,32 @@ public class ConceptDiagramsConvertAllChangeGenerator implements ChangeListGener
     @Override
     public OntologyChangeList<OWLClass> generateChanges(OWLAPIProject project, ChangeGenerationContext context) {
 
-        // FIXME ... need to bundle this better so that both the standard and this are calling same fn()
-        // -----
-        TransformationManager manger = new TransformationManager(history);
-
-        OWLOntologyManager owlManager = project.getRootOntology().getOWLOntologyManager();
-        OWLAPIOutputBuilder OWLbuilder = new OWLAPIOutputBuilder(project.getRootOntology(), owlManager.getOWLDataFactory());
-
-        manger.translateAll(OWLbuilder);
-        // ----
-
-
-
         // Don't know what a sensible type parameter is here?
         // I'm taking it that the Option in OntologyChange list means that it's not required
         OntologyChangeList.Builder<OWLClass> builder = new OntologyChangeList.Builder<OWLClass>();
-        builder.addAll(OWLbuilder.getChanges());
+
+        // FIXME ... need to bundle this better so that both the standard and this are calling same fn()
+        // -----
+        // was cobbled together from ConvertAllToOWLServiceImpl and ConvertDiagramsToOWL
+        for(ArrayList<Command> history : histories) {
+            if(history.size() > 0) {
+                // just property diagrams for now
+                if(history.get(0).getDiagram().getDiagramSet().isPropertyDiagramSet()) {
+
+                    TransformationManager manger = new TransformationManager(history);
+
+                    OWLOntologyManager owlManager = project.getRootOntology().getOWLOntologyManager();
+                    OWLAPIOutputBuilder OWLbuilder = new OWLAPIOutputBuilder(project.getRootOntology(), owlManager.getOWLDataFactory());
+
+                    manger.translateAll(OWLbuilder);
+
+
+                    builder.addAll(OWLbuilder.getChanges());
+
+                }
+            }
+        }
+
         return builder.build();
     }
 

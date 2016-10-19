@@ -18,7 +18,11 @@ import com.gwtext.client.widgets.*;
 import edu.stanford.bmir.protege.web.client.project.Project;
 import edu.stanford.bmir.protege.web.client.ui.portlet.AbstractOWLEntityPortlet;
 import edu.stanford.bmir.protege.web.shared.selection.SelectionModel;
+import org.ontologyengineering.conceptdiagrams.web.client.handler.ConvertToOWLServiceManager;
+import org.ontologyengineering.conceptdiagrams.web.client.handler.StandardDiagramsConvertToOWLServiceManager;
 import org.ontologyengineering.conceptdiagrams.web.client.ui.LienzoDiagramCanvas;
+import org.ontologyengineering.conceptdiagrams.web.shared.StandardClientContext;
+import org.ontologyengineering.conceptdiagrams.web.shared.presenter.DiagramPresenter;
 import org.ontologyengineering.protege.web.client.handler.WebProtegeConvertToOWLServiceManager;
 
 
@@ -55,12 +59,24 @@ public class DiagramsEntityPortlet extends AbstractOWLEntityPortlet {
 
         int width = getInnerWidth();
         int height = getInnerHeight();
-        Panel test = new AbsolutePanel();
-        add(test);
-        diagramCanvas = new LienzoDiagramCanvas(width, height, test, new WebProtegeConvertToOWLServiceManager(getProjectId()));
+        //Panel test = new AbsolutePanel();
+        //add(test);
+//        diagramCanvas = new LienzoDiagramCanvas(width, height, test, new WebProtegeConvertToOWLServiceManager(getProjectId()));
 
 //        com.gwtext.client.widgets.Panel test = new com.gwtext.client.widgets.Panel();
 //        diagramCanvas = new LienzoDiagramCanvas(width, height, test);
+
+
+
+        LienzoDiagramCanvas diagramCanvas;
+        DiagramPresenter presenter;
+
+        ConvertToOWLServiceManager converToOWLsrvc = new WebProtegeConvertToOWLServiceManager(getProjectId());
+
+        diagramCanvas = new LienzoDiagramCanvas();
+        presenter = new DiagramPresenter(diagramCanvas, converToOWLsrvc);
+
+        add(diagramCanvas.asDockLayoutPanel());
     }
 
 
